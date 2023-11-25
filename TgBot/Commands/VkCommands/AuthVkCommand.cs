@@ -8,9 +8,10 @@ using TgBot.controller.BotController.Services;
 namespace TgBot.Commands;
 
 [Description("Auth By vk")]
-public class AuthVkCommand : ICommand
+public class AuthVk : ICommand
 {
     public string Name { get; } = "/vk";
+    public string desc { get; } = "auth by vk";
     private readonly string _text = "Vk";
 
     private readonly string _authUrlWebApp =

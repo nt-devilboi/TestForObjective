@@ -1,16 +1,13 @@
-using System.ComponentModel;
-using System.Reflection;
 using Telegram.Bot;
-using Telegram.Bot.Types.ReplyMarkups;
 using TgBot.controller.BotController.Services;
 using TgBot.controller.model;
 
 namespace TgBot.Commands;
 
-[Description("Get All Commands")]
 public class HelpCommand : ICommand
 {
     public string Name { get; } = "/help";
+    public string desc { get; } = "Get All Commands";
     private readonly List<InfoCommand> _infoCommands;
 
     public HelpCommand(List<InfoCommand> infoCommands)

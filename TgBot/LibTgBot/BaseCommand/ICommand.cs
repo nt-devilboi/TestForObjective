@@ -7,5 +7,6 @@ public interface ICommand
 {
     public string Name { get; }
     
+    public string desc { get; }
     public Task Execute(IRequest request, ITelegramBotClient bot);
 }
