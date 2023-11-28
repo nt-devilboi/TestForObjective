@@ -29,7 +29,7 @@ builder.Services.AddSingleton<IAccountVkRepository, AccountVkRepositoryFake>();
 builder.Services.AddTelegramCommands();
 builder.Services.AddTransient<IVkApi, VkApi>(_ =>  new VkApi());
 
-builder.Services.AddTelegramBot("https://5646-5-165-20-246.ngrok.io", "6184368668:AAHhdVpR7WvBzM6qFaR1EnWpLBIw4v72tq0");
+builder.Services.AddTelegramBot("https://d1e6-5-165-24-116.ngrok.io", "6184368668:AAHhdVpR7WvBzM6qFaR1EnWpLBIw4v72tq0");
 
 
 

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using MyBotTg.Bot;
 using Telegram.Bot;
 using Telegram.Bot.Types;
+using TgBot.controller.model;
 using TgBot.ExtentionHttpContext;
 using Vostok.Logging.Abstractions;
 
@@ -25,14 +26,15 @@ public class AuthController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Auth(string code)
+    public async Task<IActionResult> Auth(string code, string state)
     {
         var accessTokenResponse = await _appAuth.GetAccessToken(code);
-        _log.Info($"token {accessTokenResponse}");
+        _log.Info($"token {accessTokenResponse} {state}");
         if (accessTokenResponse == null) return new StatusCodeResult(404);
+
         
-        
-        return Ok($"введи токен в боте {accessTokenResponse.AccessToken}");
+        await _accountVkRepository.Add(new AccessToken() {Token = accessTokenResponse.AccessToken}, long.Parse(state));
+        return Ok();
     }
 
 }

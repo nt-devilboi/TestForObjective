@@ -29,9 +29,8 @@ public static class ExtensionBotTg
     {
         using var scope = app.Services.CreateScope();
         var services = scope.ServiceProvider;
-
+        
         var commands = services.GetService<ICommands>();
-
         if (commands == null)
         {
             throw new ApplicationException("NOT HAVE ADDED serviceCommands");
@@ -51,7 +50,7 @@ public static class ExtensionBotTg
             var servicesCommand = new List<object>();
             foreach (var parameter in parameters)
             {
-                servicesCommand.Add(services.GetRequiredService(parameter.ParameterType));
+                servicesCommand.Add(services.GetService(parameter.ParameterType)); //todo: здесь немного кринж с InfoCommand поэтому без requers
             }
 
             var command = assembly.CreateInstanceCommand(servicesCommand, typeCommand.FullName);

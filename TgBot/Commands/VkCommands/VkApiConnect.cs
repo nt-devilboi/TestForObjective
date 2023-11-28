@@ -16,7 +16,6 @@ public abstract class VkApiConnect // todo: можно сделать факби
 
     public void AuthByToken(string token)
     {
-        
         _vkApi.Authorize(new ApiAuthParams() {AccessToken = token, Settings = Settings.FromJsonString("wall,friends") });
     }
 }

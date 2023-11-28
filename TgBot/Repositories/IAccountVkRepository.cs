@@ -5,7 +5,7 @@ namespace MyBotTg.Bot;
 
 public interface IAccountVkRepository
 {
-    public Task Add(AccessToken tokenResponse, Chat chat);
+    public Task Add(AccessToken tokenResponse, long chatId);
     public Task<string?> GetAccessTokenByChat(long chatId);
     public Task Remove(int id);
 }

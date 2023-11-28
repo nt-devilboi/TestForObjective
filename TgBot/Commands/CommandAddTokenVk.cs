@@ -23,7 +23,7 @@ public class AddVkToken :VkApiConnect, ICommand
     public async Task Execute(IRequest request, ITelegramBotClient bot)
     {
         var accessToken = new AccessToken() { Token = request.ExtraData };
-        await _accountVkRepository.Add(accessToken, request.Message.Chat); // todo: проверка на то, что токен вообще загружен
+        await _accountVkRepository.Add(accessToken, request.Message.Chat.Id); // todo: проверка на то, что токен вообще загружен
         await bot.SendTextMessageAsync(request.Message.Chat.Id,"Токен загружен");
     }
 }

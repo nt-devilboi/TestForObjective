@@ -8,9 +8,9 @@ namespace TgBot;
 public class AccountVkRepositoryFake : IAccountVkRepository
 {
     private readonly ConcurrentDictionary<string, string> _concurrentDictionary = new ConcurrentDictionary<string, string>();
-    public async Task Add(AccessToken tokenResponse, Chat chatId)
+    public async Task Add(AccessToken tokenResponse, long chatId)
     {
-        _concurrentDictionary.TryAdd(chatId.Id.ToString(), tokenResponse.Token);
+        _concurrentDictionary.TryAdd(chatId.ToString(), tokenResponse.Token);
     }
 
     public async Task<string?> GetAccessTokenByChat(long chatId)
