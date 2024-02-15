@@ -1,49 +1,28 @@
-using System.Net;
-using Newtonsoft.Json;
-using TgBot;
+using System.Net;   
 using TgBot.controller.model;
 using TgBot.ExtentionHttpContext;
-using Vostok.Logging.Abstractions;
+using UlearnTodoTimer.Infrasturcture.Services.AppAuth;
 
 namespace MyBotTg.Bot;
 
-public class AppAuth : IAppAuth
+public class AppAuth: IAppAuth
 {
-    private readonly AppSettings _settings;
-    private readonly string _urlAuth = AuthRequest.AuthUrl;
-    private readonly ILog _log;
+    private readonly IProvideOAuth _settings;
     
-    public AppAuth(AppSettings settings, ILog log)
+    public AppAuth(IProvideOAuth settings)
     {
-        _log = log;
         _settings = settings;
     }
     
-    public async Task<AccessTokenResponse> GetAccessToken(string code)
+    public async Task<AccessTokenResponse?> GetAccessToken(string code)
     {
-        _log.Info($"Code on server: {code}");
-        var requestAuth = CreateRequestOnAuth(code);
+        var vkOAuth = _settings.GetOAuth("vk");
         
-        using var httpClient = new HttpClient();
-        var responseMessage = await httpClient.GetAsync(requestAuth);
-        if (responseMessage.StatusCode != HttpStatusCode.OK)
-        {
-            _log.Error("Failed to Get access token");
-            return null;
-        }
+        var requestAuth = vkOAuth.CreateGetAccessTokenRequest(code);
+        var responseAuth = await new HttpClient().GetAsync(requestAuth);
         
-        var tokenResponse = await responseMessage.Content.JsonDeserialase<AccessTokenResponse>();
-        httpClient.Dispose();
-        _log.Info($"info token: {tokenResponse}");
-        return tokenResponse;
-    }
-
-    private string CreateRequestOnAuth(string code)
-    {
-        return $"https://oauth.vk.com/access_token?" +
-               $"client_id={_settings.clientId}&" +
-               $"client_secret={_settings.ClientSecret}&" +
-               $"redirect_uri={_urlAuth}&" +
-               $"code={code}";
+        if (responseAuth.StatusCode != HttpStatusCode.OK) return null;
+        
+        return await responseAuth.Content.JsonDeserialse<AccessTokenResponse>();;
     }
 }

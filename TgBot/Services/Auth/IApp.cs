@@ -4,6 +4,6 @@ namespace MyBotTg.Bot;
 
 public interface IAppAuth
 {
-    Task<AccessTokenResponse> GetAccessToken(string code);
+    Task<AccessTokenResponse?> GetAccessToken(string code);
     
 }

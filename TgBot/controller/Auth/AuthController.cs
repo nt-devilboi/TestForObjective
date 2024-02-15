@@ -16,8 +16,11 @@ public class AuthController : ControllerBase
     private readonly IAppAuth _appAuth;
     private readonly IAccountVkRepository _accountVkRepository;
     private readonly ITelegramBotClient _client;
-    
-    public AuthController(ITelegramBotClient client, IAppAuth appAuth, ILog log, IAccountVkRepository accountVkRepository)
+
+    public AuthController(ITelegramBotClient client, 
+        IAppAuth appAuth,
+        ILog log,
+        IAccountVkRepository accountVkRepository)
     {
         _client = client;
         _appAuth = appAuth;
@@ -26,15 +29,18 @@ public class AuthController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Auth(string code, string state)
+    public async Task<IActionResult> Auth([FromQuery] string code, [FromQuery(Name = "state")] string chatId)
     {
-        var accessTokenResponse = await _appAuth.GetAccessToken(code);
-        _log.Info($"token {accessTokenResponse} {state}");
-        if (accessTokenResponse == null) return new StatusCodeResult(404);
-
+        _log.Info($"receive code {code} for chatId {chatId}");
         
-        await _accountVkRepository.Add(new AccessToken() {Token = accessTokenResponse.AccessToken}, long.Parse(state));
+        var accessTokenResponse = await _appAuth.GetAccessToken(code);
+        _log.Info($"token {accessTokenResponse}");
+
+        if (accessTokenResponse == null) return NotFound("token not receive");
+        
+        await _accountVkRepository.Add(accessTokenResponse, long.Parse(chatId));
+        await _client.SendTextMessageAsync(chatId, "Authorization occured successful");
+
         return Ok();
     }
-
 }

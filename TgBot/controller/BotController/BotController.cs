@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using TgBot.controller.model;
+using TgBot.LibTgBot.BaseCommand;
 
 namespace TgBot.controller.BotController;
 
@@ -19,28 +20,24 @@ public class BotController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] Update update)
+    public async Task<IActionResult> Post([FromBody] Update? update)
     {
-        if (update == null) return new OkResult();
-        
-        var message = update.Message;
-        if (message.Text == null) return new OkResult();
+        if (update?.Message?.Text == null) return new OkResult();
 
-        var request = message.Parse();
-        if (!request.IsCommand())
+        var request = update.Message.Parse();
+        if (request == null)
         {
-            await _commands.Get(request.CommandName).Execute(request, _telegramBotClient);
+            await _commands.Get(BaseCommand.ExceptionThisNotCommand).Execute(request, _telegramBotClient);
             return new OkResult();
         }
 
         if (!_commands.Contains(request.CommandName))
         {
-            await _commands.Get("Unknown").Execute(request, _telegramBotClient);
+            await _commands.Get(BaseCommand.ExceptionUknownCommand).Execute(request, _telegramBotClient);
             return new OkResult();
         }
 
         var command = _commands.Get(request.CommandName);
-
         await command.Execute(request, _telegramBotClient);
 
         return new OkResult();

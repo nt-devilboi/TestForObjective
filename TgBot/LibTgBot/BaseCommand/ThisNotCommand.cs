@@ -5,9 +5,9 @@ namespace TgBot.LibTgBot.BaseCommand;
 
 public class ThisNotCommand : ICommand
 {
-    public string Name { get; } = "This Not Command";
+    public string Name { get; } = BaseCommand.ExceptionThisNotCommand;
     public string desc { get; }
-    public async Task Execute(IRequest request, ITelegramBotClient bot)
+    public async Task Execute(IRequest? request, ITelegramBotClient bot)
     {
         await bot.SendTextMessageAsync(request.Message.Chat.Id, "command start with '/' ");
     }

@@ -16,7 +16,7 @@ public class HelpCommand : ICommand
     }
 
 
-    public async Task Execute(IRequest request, ITelegramBotClient bot)
+    public async Task Execute(IRequest? request, ITelegramBotClient bot)
     {
         await bot.SendTextMessageAsync(request.Message.Chat.Id,string.Join("\n",_infoCommands));
     }
