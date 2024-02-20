@@ -54,8 +54,7 @@ public class SyncEmails : ICommand
             _log.Info($"send to {mail.Address}");
             var to = new MailAddress(mail.Address);
             var m = new MailMessage(from, to);
-            smtp.SendCompleted += (sender, args) => _log.Info($"sync with {to.Address}");
-            
+         
             m.Subject = "Актуальные цены на квартиры";
             m.Body = string.Join(Environment.NewLine, infoAparts.Select(x => x.ToString()));
 
