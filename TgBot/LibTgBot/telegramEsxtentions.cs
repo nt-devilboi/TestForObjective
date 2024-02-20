@@ -4,7 +4,7 @@ namespace TgBot;
 
 public static class telegramExtensions
 {
-    public static IRequest? Parse(this Message message)
+    public static IRequest? Parse(this Message message) //todo: круто было бы обернуть ответ в класс Result. а вовзращать null такое себе. непонятно нифига, если не читать этот код)
     {
         var command = message.Text.Split(' ');
         if (command.Length == 0 || command[0][0] != '/') return null;

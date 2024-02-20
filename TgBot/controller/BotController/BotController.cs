@@ -27,13 +27,13 @@ public class BotController
         var request = update.Message.Parse();
         if (request == null)
         {
-            await _commands.Get(BaseCommand.ExceptionThisNotCommand).Execute(request, _telegramBotClient);
+            await _telegramBotClient.SendTextMessageAsync(update.Message.Chat.Id, "command start with '/' ");
             return new OkResult();
         }
 
         if (!_commands.Contains(request.CommandName))
         {
-            await _commands.Get(BaseCommand.ExceptionUknownCommand).Execute(request, _telegramBotClient);
+            await _commands.Get(BaseCommand.ExceptionUnknownCommand).Execute(request, _telegramBotClient);
             return new OkResult();
         }
 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\VOISTINU\\RiderProjects\\TgBot\\TgBot\\TgBot.csproj": {}
+    "C:\\Users\\VOISTINU\\Desktop\\TelegramBot\\TgBot\\TgBot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\VOISTINU\\RiderProjects\\TgBot\\TgBot\\TgBot.csproj": {
+    "C:\\Users\\VOISTINU\\Desktop\\TelegramBot\\TgBot\\TgBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\VOISTINU\\RiderProjects\\TgBot\\TgBot\\TgBot.csproj",
+        "projectUniqueName": "C:\\Users\\VOISTINU\\Desktop\\TelegramBot\\TgBot\\TgBot.csproj",
         "projectName": "TgBot",
-        "projectPath": "C:\\Users\\VOISTINU\\RiderProjects\\TgBot\\TgBot\\TgBot.csproj",
+        "projectPath": "C:\\Users\\VOISTINU\\Desktop\\TelegramBot\\TgBot\\TgBot.csproj",
         "packagesPath": "C:\\Users\\VOISTINU\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\VOISTINU\\RiderProjects\\TgBot\\TgBot\\obj\\",
+        "outputPath": "C:\\Users\\VOISTINU\\Desktop\\TelegramBot\\TgBot\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\VOISTINU\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -38,6 +38,14 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "EasyOAuth2.0": {
+              "target": "Package",
+              "version": "[1.0.1, )"
+            },
+            "MediatR": {
+              "target": "Package",
+              "version": "[12.2.0, )"
+            },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[7.0.11, )"
@@ -45,6 +53,24 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[7.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.16, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

@@ -45,7 +45,7 @@ public class Commands : ICommands
     {
         if (!_commands.ContainsKey(commandName))
         {
-            throw new ArgumentException("this Command not Existed");
+            throw new ArgumentException($"this Command not Existed {commandName}");
         }
 
         return _commands[commandName];

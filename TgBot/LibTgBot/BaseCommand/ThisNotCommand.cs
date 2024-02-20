@@ -9,6 +9,7 @@ public class ThisNotCommand : ICommand
     public string desc { get; }
     public async Task Execute(IRequest? request, ITelegramBotClient bot)
     {
-        await bot.SendTextMessageAsync(request.Message.Chat.Id, "command start with '/' ");
+        var x = request.Message.Chat.Id;
+        await bot.SendTextMessageAsync(x, "command start with '/' ");
     }
 }

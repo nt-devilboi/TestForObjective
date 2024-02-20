@@ -5,7 +5,7 @@ namespace TgBot.LibTgBot.BaseCommand;
 
 public class UnknownCommand : ICommand
 {
-    public string Name { get; } = BaseCommand.ExceptionThisNotCommand;
+    public string Name { get; } = BaseCommand.ExceptionUnknownCommand;
     public string desc { get; }
     public async Task Execute(IRequest? request, ITelegramBotClient bot)
     {
